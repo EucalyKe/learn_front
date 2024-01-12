@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第三個網頁-模板字串</title>
+    </head>
+    <body>
+        <button onclick="
+            console.log(`目前購物車總金額 : ${total}`);
+        ">購物車總額</button>
+        <button onclick="
+            cal(0)
+        ">清空購物車</button>
+        <hr/>
+        <p>商品1  $100</p>
+        <button onclick="
+            cal(100)
+        ">加入購物車</button>
+        
+        <p>商品2  $200</p>
+        <button onclick="
+            cal(200)
+        ">加入購物車</button>
+        
+        <script>
+            let total = 0;
+            function cal(num) {
+                if (num == 0) {
+                    total = 0;
+                    console.log('已清空購物車');
+                } else {
+                    total = total + num;
+                }
+                console.log(`目前購物車總金額 : ${total}`);
+            }
+            // 原始
+            let name   = 'Eucaly';
+            let age    = 33;
+            let height = 156;
+            let des    = 'des    Name : ' + name + ', Age : ' + age + ' years old, Height : ' + height + ' cm';
+            console.log(des);
+
+            // 模板字串, 也可直接內部運算
+            let desStr = `desStr Name : ${name}, Age : ${age + 1} years old, Height : ${height} cm`;
+            console.log(desStr);
+        </script>
+    </body>
+</html>
+
+

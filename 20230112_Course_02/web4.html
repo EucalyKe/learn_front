@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第四個網頁-變數II</title>
+    </head>
+    <body>
+        <button onclick="
+            console.log(`目前購物車總金額 : ${total}`);
+        ">購物車總額</button>
+        <button onclick="cal(0)">清空購物車</button>
+        <hr/>
+        <p>商品1  $100</p>
+        <button onclick="cal(100)">加入購物車</button>
+        
+        <p>商品2  $200</p>
+        <button onclick="cal(200)">加入購物車</button>
+        
+        <script>
+            let total = 0;
+            function cal(num) {
+                if (num == 0) {
+                    total = 0;
+                    console.log('已清空購物車');
+                } else {
+                    total += num;
+                }
+                console.log(`目前購物車總金額 : ${total}`);
+            }
+            
+            // 加減乘除的縮寫
+            let price = 100;
+            console.log(`price += 100 : ${price += 100}`);
+            console.log(`price += price : ${price += price}`);
+            console.log(`price -= 100 : ${price -= 100}`);
+            console.log(`price *= 10 : ${price *= 10}`);
+            console.log(`price /= 10 : ${price /= 10}`);
+            price++;
+            console.log(`price++ : ${price}`);
+            price--;
+            console.log(`price-- : ${price}`);
+
+            // 變數定義
+            // let 創建好, 仍可任意修改值
+            let   price1 = 0;
+            // const 一旦被創建後就無法被修改, 故一開始就要給值
+            const price2 = 0;
+            // var 是比較舊版的寫法, 存在一些問題(區域汙染全域的問題), 故目前大多不使用此
+            var   price3 = 0;
+        </script>
+    </body>
+</html>
+
+

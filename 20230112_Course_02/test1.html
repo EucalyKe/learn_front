@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第一個測驗網頁</title>
+    </head>
+    <body>
+        <button onclick="
+            console.log(total);
+        ">購物車總額</button>
+        <button onclick="
+            cal(0)
+        ">清空購物車</button>
+        <hr/>
+        <p>商品1  $100</p>
+        <button onclick="
+            cal(100)
+        ">加入購物車</button>
+        
+        <p>商品2  $200</p>
+        <button onclick="
+            cal(200)
+        ">加入購物車</button>
+        
+        <script>
+            let total = 0;
+            
+            function cal(num) {
+                if (num == 0) {
+                    total = 0;
+                    console.log('已清空購物車');
+                } else {
+                    total = total + num;
+                }
+                console.log(total);
+            }
+        </script>
+    </body>
+</html>
+
+
