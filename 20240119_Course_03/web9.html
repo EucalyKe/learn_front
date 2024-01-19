@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第九個網頁-函式、函數、回傳</title>
+    </head>
+    <body>
+        <p>請選擇剪刀、石頭、布</p>
+        <button onclick="checkResult('剪刀');">
+            剪刀
+        </button>
+        <button onclick="checkResult('石頭');">
+            石頭
+        </button>
+        <button onclick="checkResult('布');">
+            布
+        </button>
+        <button onclick="checkResult();">
+            預設值測試
+        </button>
+        <script>
+            function hello() {
+                console.log('Hello! World!!');
+            }
+            hello();
+
+            // 實作剪刀石頭布
+            const scissors = '剪刀';
+            const rock     = '石頭';
+            const paper    = '布';
+            function generateComputerChoice() {
+                const randomNum = Math.random() * 3;
+                if ( 0 <= randomNum && randomNum < 1 ) {
+                    return scissors;
+                    // return之後的程式不會被執行
+                    console.log('我是不會被執行的內容');
+                } else if ( 1 <= randomNum && randomNum < 2 ) {
+                    return rock;
+                } else {
+                    return paper;
+                }
+            }
+
+            // 呼叫時候沒傳入, 等於後面為預設值
+            function checkResult(myChoice = scissors) {
+                let computerChoice = generateComputerChoice();
+                let result = '';
+                if (myChoice === computerChoice) {
+                    result = '平手';
+                } else if (myChoice === scissors) {
+                    if (computerChoice === rock) {
+                        result = '電腦勝';
+                    } else { // paper
+                        result = '我方勝';
+                    }
+                } else if (myChoice === rock) {
+                    if (computerChoice === paper) {
+                        result = '電腦勝';
+                    } else { // scissors
+                        result = '我方勝';
+                    }
+                } else if (myChoice === paper) {
+                    if (computerChoice === scissors) {
+                        result = '電腦勝';
+                    } else { // rock
+                        result = '我方勝';
+                    }
+                }
+                let resultStr = `我方 : ${myChoice}, 電腦 : ${computerChoice}, 結果 : ${result}`;
+                console.log(resultStr);
+                alert(resultStr);
+            }
+        </script>
+    </body>
+</html>
+
+

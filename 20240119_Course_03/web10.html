@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第十個網頁-物件</title>
+    </head>
+    <body>
+        <button onclick="
+            showCart();
+        ">購物車總額</button>
+        <button onclick="
+            let product0 = {
+                itemName: '清空',
+                price: 0
+            };
+            cal(product0);
+            showCart()
+        ">清空購物車</button>
+
+        <hr/>
+
+        <p>商品1  $100</p>
+        <button onclick="
+            let product1 = {
+                itemName: '商品1',
+                price: 100
+            };
+            cal(product1);
+            showCart();
+        ">加入購物車</button>
+        <p>商品2  $200</p>
+        <button onclick="
+            let product2 = {
+                itemName: '商品2',
+                price: 200
+            };
+            cal(product2);
+            showCart();
+        ">加入購物車</button>
+
+        <script>
+            // 物件可以幫我們把資料結合在一起
+            let product = {
+                name: '海底撈泡麵',
+                price: 100
+            }
+            console.log(product);
+            console.log(product.name);
+            console.log(product.price);
+        
+            // 修改物件屬性
+            product.price = 200;
+            console.log(product.price);
+            
+            // 新增物件沒有的屬性
+            product.expireDate = "2023/12/12";
+            console.log(product);
+
+            // 刪除物件屬性
+            delete product.price;
+            console.log(product);
+
+            // 查看資料型態
+            console.log(typeof product);
+            console.log(typeof product.name);
+            console.log(typeof product.expireDate);
+
+            // 購物車
+            let calList = {
+                totalPrice: 0, // 總金額
+                totalProduct: 0, // 購買總個數
+                product1 :0,
+                product2 :0
+            };
+
+            // 計算金額數量
+            function cal(product) {
+                if (product.price == 0) {
+                    calList.totalPrice = 0;
+                    calList.totalProduct = 0;
+                    calList.product1 = 0;
+                    calList.product2 = 0;
+                    console.log('已清空購物車');
+                } else {
+                    calList.totalPrice = calList.totalPrice + product.price;
+                    calList.totalProduct++;
+                    console.log(`購買 ${product.itemName}`);
+                    if (product.itemName === '商品1') {
+                        calList.product1++;
+                    } else if (product.itemName === '商品2') {
+                        calList.product2++;
+                    }
+                }
+            }
+
+            function showCart() {
+                console.log(`目前購物車總金額 : ${calList.totalPrice}, 購買總數量 : ${calList.totalProduct}`);
+                console.log(`商品1 數量 : ${calList.product1}, 商品2 數量 : ${calList.product2}`);
+            }
+
+            // 取得物件屬性
+            console.log(calList['totalPrice']);
+
+            // 在物件裡面的函數
+            let cart = {
+                name: 'cart',
+                // 物件裡面的函數叫做方法
+                showCart: function showCartTest(item1, item2) {
+                    console.log(`${item1}, ${item2}`);
+                    console.log(`目前購物車總金額 : ${calList.totalPrice}, 購買總數量 : ${calList.totalProduct}`);
+                    console.log(`商品1 數量 : ${calList.product1}, 商品2 數量 : ${calList.product2}`);
+                }
+            }
+
+            cart.showCart();
+            cart.showCart(1, 2);
+        </script>
+    </body>
+</html>
+
+

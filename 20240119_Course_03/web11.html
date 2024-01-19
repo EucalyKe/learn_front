@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第十一個網頁-localStorage JSON</title>
+    </head>
+    <body>
+        <button onclick="
+            showCart();
+        ">購物車總額</button>
+        <button onclick="
+            let product0 = {
+                itemName: '清空',
+                price: 0
+            };
+            cal(product0);
+            showCart()
+        ">清空購物車</button>
+
+        <hr/>
+
+        <p>商品1  $100</p>
+        <button onclick="
+            let product1 = {
+                itemName: '商品1',
+                price: 100
+            };
+            cal(product1);
+            showCart();
+        ">加入購物車</button>
+        <p>商品2  $200</p>
+        <button onclick="
+            let product2 = {
+                itemName: '商品2',
+                price: 200
+            };
+            cal(product2);
+            showCart();
+        ">加入購物車</button>
+
+        <script>
+            // 購物車
+            let calList = {
+                totalPrice: 0, // 總金額
+                totalProduct: 0, // 購買總個數
+                product1 :0,
+                product2 :0
+            };
+
+            // 計算金額數量
+            function cal(product) {
+                if (product.price == 0) {
+                    calList.totalPrice = 0;
+                    calList.totalProduct = 0;
+                    calList.product1 = 0;
+                    calList.product2 = 0;
+                    console.log('已清空購物車');
+                } else {
+                    calList.totalPrice = calList.totalPrice + product.price;
+                    calList.totalProduct++;
+                    console.log(`購買 ${product.itemName}`);
+                    if (product.itemName === '商品1') {
+                        calList.product1++;
+                    } else if (product.itemName === '商品2') {
+                        calList.product2++;
+                    }
+                }
+            }
+
+            // 在物件裡面的函數
+            let cart = {
+                name: 'cart',
+                test: {
+                    item1: 'this is a item1',
+                    item2: 'this is a item2',
+                    price: 300
+                },
+                // 物件裡面的函數叫做方法
+                showCart: function showCartTest(item1, item2) {
+                    console.log(`${item1}, ${item2}`);
+                    console.log(`目前購物車總金額 : ${calList.totalPrice}, 購買總數量 : ${calList.totalProduct}`);
+                    console.log(`商品1 數量 : ${calList.product1}, 商品2 數量 : ${calList.product2}`);
+                }
+            }
+            
+            // localStorage
+            // 儲存的資料只能是String, 即便存進去的型態不同, 仍會被轉成String
+            // 存值
+            localStorage.setItem('price', 1000);
+            // 取值 方式一
+            console.log(localStorage.getItem('price'));
+            // 修改存值
+            localStorage.setItem('price', 2000);
+            // 取值 方式二
+            const price = localStorage.getItem('price');
+            console.log(price);
+
+            localStorage.setItem('cart', cart);
+            const cart1 = localStorage.getItem('cart');
+            console.log(cart1);
+
+            // 刪除
+            localStorage.removeItem('cart');
+            const cart2 = localStorage.getItem('cart');
+            console.log(cart2);
+            
+            // JS object to JSON
+            const jsonCart = JSON.stringify(cart);
+            console.log(jsonCart);
+            console.log(typeof jsonCart);
+            localStorage.setItem('jsonCart', jsonCart)
+
+            const parseCart = localStorage.getItem('jsonCart');
+
+            // JSON to JS obejct
+            const jsCart = JSON.parse(parseCart);
+            console.log(jsCart);
+            console.log(typeof jsCart);
+        </script>
+    </body>
+</html>
+
+

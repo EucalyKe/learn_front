@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Java Script第一個測驗網頁-購物車</title>
+    </head>
+    <body>
+        <button onclick="
+            showCart();
+        ">購物車總額</button>
+        <button onclick="
+            calCart(null);
+            showCart();
+        ">清空購物車</button>
+
+        <hr/>
+
+        <p>商品1  $100</p>
+        <button onclick="
+            calCart(cart.item1);
+            showCart();
+        ">加入購物車</button>
+        <p>商品2  $200</p>
+        <button onclick="
+            calCart(cart.item2);
+            showCart();
+        ">加入購物車</button>
+
+        <script>
+            // 購物車
+            let cart = {
+                totalPrice: 0, // 總金額
+                totalNum: 0,   // 總數量
+                item1: { // 商品1
+                    name: '泡麵',
+                    price: 100,
+                    num: 0
+                },
+                item2: { // 商品2
+                    name: '可樂',
+                    price: 200,
+                    num: 0
+                }
+            };
+
+            // 確認localStorage是否存在
+            function parseCart() {
+                let isExists = localStorage.getItem('cart');
+                if (isExists !== null) {
+                    let lsCart = JSON.parse(isExists);
+                    cart.totalPrice = lsCart.totalPrice;
+                    cart.totalNum   = lsCart.totalNum;
+                    cart.item1.num  = lsCart.item1.num;
+                    cart.item2.num  = lsCart.item2.num;
+                }
+            }
+
+            // 計算金額 & 數量
+            function calCart(item) {
+                parseCart();
+                if (item === null) { // 清空購物車
+                    console.log('清空購物車');
+                    cart.totalPrice = 0;
+                    cart.totalNum   = 0;
+                    cart.item1.num  = 0;
+                    cart.item2.num  = 0;
+                } else {
+                    console.log(`購買${item.name}`);
+                    if (item.name === cart.item1.name) { // 泡麵
+                        cart.totalPrice = cart.totalPrice + cart.item1.price;
+                        cart.totalNum++;
+                        cart.item1.num++;
+                    } else if (item.name === cart.item2.name) { // 可樂
+                        cart.totalPrice = cart.totalPrice + cart.item2.price;
+                        cart.totalNum++;
+                        cart.item2.num++;
+                    }
+                }
+                // 存在localStorage
+                let jsonCart = JSON.stringify(cart);
+                localStorage.setItem('cart', jsonCart);
+            }
+
+            // 顯示
+            function showCart() {
+                parseCart();
+                console.log(`${cart.item1.name} : ${cart.item1.num}`);
+                console.log(`${cart.item2.name} : ${cart.item2.num}`);
+                console.log(`目前總金額 : ${cart.totalPrice}`);
+                console.log(`目前總數量 : ${cart.totalNum}`);
+            }
+        </script>
+    </body>
+</html>
+
+
